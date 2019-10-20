@@ -1,4 +1,5 @@
 import React from "react";
+var validator = require("email-validator");
 
 class Register extends React.Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class Register extends React.Component {
     })
       .then(response => response.json())
       .then(user => {
-        if (user) {
+        if (user.id && validator.validate(this.state.email)) {
           this.props.loadUser(user);
           this.props.onRouteChange("home");
         }
